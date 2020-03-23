@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FoodDelivery.Domain.Entities;
+using FoodDelivery.WebUI.Infrastructure.Binders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +15,7 @@ namespace FoodDelivery.WebUI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }
