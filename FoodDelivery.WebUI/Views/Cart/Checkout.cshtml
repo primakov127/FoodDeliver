@@ -1,0 +1,38 @@
+﻿@model FoodDelivery.Domain.Entities.Order
+
+@{
+    ViewBag.Title = "FoodDelivery: форма заказа";
+}
+
+<h2>Оформить заказ сейчас</h2>
+<p>Пожалуйста введи ваши контактные данные!</p>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary();
+    <h3>Данные</h3>
+    <div class="form-group">
+        <label>Ваше имя:</label>
+        @Html.TextBoxFor(x => x.ClientName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Телефон:</label>
+        @Html.TextBoxFor(x => x.ClientPhone, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Адрес:</label>
+        @Html.TextBoxFor(x => x.ClientAddress, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Комментарий к заказу:</label>
+        @Html.TextBoxFor(x => x.Comment, new { @class = "form-control" })
+    </div>
+
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Обработать заказ" />
+    </div>
+}
+

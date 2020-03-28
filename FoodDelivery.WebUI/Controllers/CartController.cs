@@ -12,10 +12,12 @@ namespace FoodDelivery.WebUI.Controllers
     public class CartController : Controller
     {
         private IProductRepository repository;
+        private IOrderProcessor orderProcessor;
 
-        public CartController(IProductRepository repo)
+        public CartController(IProductRepository repo, IOrderProcessor processor)
         {
             repository = repo;
+            orderProcessor = processor;
         }
 
         public ViewResult Index(Cart cart,string returnUrl)
@@ -27,10 +29,10 @@ namespace FoodDelivery.WebUI.Controllers
             });
         }
 
-        public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
+        public RedirectToRouteResult AddToCart(Cart cart, int Id, string returnUrl)
         {
             Product product = repository.Products
-                .FirstOrDefault(p => p.ProductId == productId);
+                .FirstOrDefault(p => p.Id == Id);
 
             if (product != null)
             {
@@ -39,10 +41,10 @@ namespace FoodDelivery.WebUI.Controllers
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        public RedirectToRouteResult RemoveFromCart(Cart cart, int productId, string returnUrl)
+        public RedirectToRouteResult RemoveFromCart(Cart cart, int Id, string returnUrl)
         {
             Product product = repository.Products
-                .FirstOrDefault(p => p.ProductId == productId);
+                .FirstOrDefault(p => p.Id == Id);
 
             if (product != null)
             {
@@ -54,6 +56,31 @@ namespace FoodDelivery.WebUI.Controllers
         public PartialViewResult Summary(Cart cart)
         {
             return PartialView(cart);
+        }
+
+        public ViewResult Checkout()
+        {
+            return View(new Order());
+        }
+
+        [HttpPost]
+        public ViewResult Checkout(Cart cart, Order order)
+        {
+            if (cart.Lines.Count() == 0)
+            {
+                ModelState.AddModelError("", "Извините, ваша корзина пуста!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                orderProcessor.ProcessOrder(cart, order);
+                cart.Clear();
+                return View("Completed");
+            }
+            else
+            {
+                return View(order);
+            }
         }
     }
 }

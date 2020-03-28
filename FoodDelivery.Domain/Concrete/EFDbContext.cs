@@ -11,5 +11,13 @@ namespace FoodDelivery.Domain.Concrete
     public class EFDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderedProducts> OrderedProducts { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderedProducts>().HasKey(x => new { x.OrderId, x.ProductId });
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using FoodDelivery.Domain.Abstract;
 using FoodDelivery.Domain.Entities;
 using FoodDelivery.WebUI.Models;
+using FoodDelivery.Domain.Concrete;
 
 namespace FoodDelivery.WebUI.Controllers
 {
@@ -25,7 +26,7 @@ namespace FoodDelivery.WebUI.Controllers
             {
                 Products = repository.Products
                 .Where(p => category == null || p.Category == category)
-                .OrderBy(product => product.ProductId)
+                .OrderBy(product => product.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize),
                 PagingInfo = new PagingInfo

@@ -13,7 +13,7 @@ namespace FoodDelivery.Domain.Entities
         public void AddItem(Product product, int quantity)
         {
             CartLine line = lineCollection
-                .Where(p => p.Product.ProductId == product.ProductId)
+                .Where(p => p.Product.Id == product.Id)
                 .FirstOrDefault();
 
             if (line == null)
@@ -32,7 +32,7 @@ namespace FoodDelivery.Domain.Entities
 
         public void RemoveLine(Product product)
         {
-            lineCollection.RemoveAll(p => p.Product.ProductId == product.ProductId);
+            lineCollection.RemoveAll(p => p.Product.Id == product.Id);
         }
 
         public decimal ComputeTotalValue()
