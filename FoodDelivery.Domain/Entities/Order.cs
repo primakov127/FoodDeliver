@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodDelivery.Domain.Entities
 {
+    [Serializable]
     [Table("Orders")]
     public class Order
     {
@@ -29,6 +30,6 @@ namespace FoodDelivery.Domain.Entities
         public Staff Call { get; set; }
         public Staff Cook { get; set; }
 
-        public virtual List<OrderedProducts> OrderedProducts { get; set; }
+        public virtual ICollection<OrderedProducts> OrderedProducts { get; set; }
     }
 }

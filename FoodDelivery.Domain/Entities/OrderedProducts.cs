@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodDelivery.Domain.Entities
 {
+    [Serializable]
     [Table("OrderedProducts")]
     public class OrderedProducts
     {
