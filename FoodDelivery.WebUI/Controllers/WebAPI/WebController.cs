@@ -10,10 +10,12 @@ using System.Web.Http;
 
 namespace FoodDelivery.WebUI.Controllers.WebAPI
 {
+    [Authorize]
     public class WebController : ApiController
     {
         private IOrderRepository repository = new EFOrderRepository();
 
+        [Authorize]
         public IEnumerable<Order> GetAllOrders()
         {
             return repository.GetAll();
