@@ -40,5 +40,19 @@ namespace FoodDelivery.WebUI.Models
             context.Validated(identity);
         }
 
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<AppUserManager>();
+
+            foreach (KeyValuePair<string, string> property in context.Properties.Dictionary)
+            {
+                context.AdditionalResponseParameters.Add(property.Key, property.Value);
+            }
+
+            context.AdditionalResponseParameters.Add("userName", context.Identity.GetUserName());
+            context.AdditionalResponseParameters.Add("userId", userManager.FindByName(context.Identity.GetUserName()).Id);
+            
+            return Task.FromResult<object>(null);
+        }
     }
 }

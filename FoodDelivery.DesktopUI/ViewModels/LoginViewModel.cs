@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FoodDelivery.DesktopUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,12 @@ namespace FoodDelivery.DesktopUI.ViewModels
     {
         private string userName;
         private string password;
+        private IAPIHelper apiHelper;
+
+        public LoginViewModel(IAPIHelper apiHelper)
+        {
+            this.apiHelper = apiHelper;
+        }
 
         public string UserName
         {
@@ -50,9 +57,16 @@ namespace FoodDelivery.DesktopUI.ViewModels
             }
         }
 
-        public void LogIn()
+        public async Task LogIn()
         {
-            
+            try
+            {
+                var result = await apiHelper.Authenticate(UserName, Password);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
