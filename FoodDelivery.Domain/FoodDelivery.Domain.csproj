@@ -128,6 +128,18 @@
     <Compile Include="Migrations\202003280914047_AddDate.designer.cs">
       <DependentUpon>202003280914047_AddDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004280913194_ChangeStaff.cs" />
+    <Compile Include="Migrations\202004280913194_ChangeStaff.designer.cs">
+      <DependentUpon>202004280913194_ChangeStaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004281108096_AddImageToProduct.cs" />
+    <Compile Include="Migrations\202004281108096_AddImageToProduct.designer.cs">
+      <DependentUpon>202004281108096_AddImageToProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004281812357_AddDisplayNameProduct.cs" />
+    <Compile Include="Migrations\202004281812357_AddDisplayNameProduct.designer.cs">
+      <DependentUpon>202004281812357_AddDisplayNameProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -144,6 +156,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003280914047_AddDate.resx">
       <DependentUpon>202003280914047_AddDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004280913194_ChangeStaff.resx">
+      <DependentUpon>202004280913194_ChangeStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004281108096_AddImageToProduct.resx">
+      <DependentUpon>202004281108096_AddImageToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004281812357_AddDisplayNameProduct.resx">
+      <DependentUpon>202004281812357_AddDisplayNameProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

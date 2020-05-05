@@ -40,5 +40,17 @@ namespace FoodDelivery.WebUI.Controllers
 
             return View(model);
         }
+
+        public FileContentResult GetImage(int Id)
+        {
+            Product product = repository.Products.FirstOrDefault(p => p.Id == Id);
+
+            if (product != null)
+            {
+                return File(product.ImageData, product.ImageMimeType);
+            }
+            else
+                return null;
+        }
     }
 }

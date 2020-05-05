@@ -1,4 +1,5 @@
 ﻿using FoodDelivery.Domain.Concrete;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.OAuth;
 using System;

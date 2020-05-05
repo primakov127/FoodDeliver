@@ -17,6 +17,41 @@ namespace FoodDelivery.Domain.Concrete
             get { return context.Products; }
         }
 
+        public void Update(Product product)
+        {
+            Product storedProduct = context.Products.Find(product.Id);
 
+            if (storedProduct != null)
+            {
+                storedProduct.Name = product.Name;
+                storedProduct.Weight = product.Weight;
+                storedProduct.Price = product.Price;
+                storedProduct.Category = product.Category;
+                storedProduct.Description = product.Description;
+                storedProduct.ImageMimeType = product.ImageMimeType;
+                storedProduct.ImageData = product.ImageData;
+            }
+
+            context.SaveChanges();
+        }
+
+        public void Add(Product product)
+        {
+            context.Products.Add(product);
+            context.SaveChanges();
+        }
+
+        public Product Remove(int productId)
+        {
+            Product storedProduct = context.Products.Find(productId);
+
+            if (storedProduct != null)
+            {
+                context.Products.Remove(storedProduct);
+                context.SaveChanges();
+            }
+
+            return storedProduct;
+        }
     }
 }

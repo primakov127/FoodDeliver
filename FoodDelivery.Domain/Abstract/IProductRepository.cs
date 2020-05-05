@@ -10,5 +10,8 @@ namespace FoodDelivery.Domain.Abstract
     public interface IProductRepository
     {
         IEnumerable<Product> Products { get; }
+        void Update(Product product);
+        void Add(Product product);
+        Product Remove(int productId);
     }
 }
