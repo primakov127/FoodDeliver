@@ -31,6 +31,7 @@ namespace FoodDelivery.WebUI
 
             OAuthAuthorizationServerOptions options = new OAuthAuthorizationServerOptions
             {
+                // Made false in Production version !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 AllowInsecureHttp = true,
                 //The Path For generating the Toekn
                 TokenEndpointPath = new PathString("/token"),

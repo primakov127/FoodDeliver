@@ -28,6 +28,7 @@ namespace FoodDelivery.WebUI.Models
             }
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
             
             // Add roles to claim
             var roleManager = HttpContext.Current.GetOwinContext().GetUserManager<AppRoleManager>();

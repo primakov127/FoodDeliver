@@ -13,7 +13,7 @@ namespace FoodDelivery.WebUI.Controllers.WebAPI
     [Authorize]
     public class WebController : ApiController
     {
-        private IOrderRepository repository = new EFOrderRepository();
+        private IRepository<Order, int> repository = new EFOrderRepository();
 
         [Authorize]
         public IEnumerable<Order> GetAllOrders()

@@ -13,6 +13,8 @@ namespace FoodDelivery.DesktopUI.ViewModels
         private string userName;
         private string password;
         private IAPIHelper apiHelper;
+        private bool isErrorVisible;
+        private string errorMessage;
 
         public LoginViewModel(IAPIHelper apiHelper)
         {
@@ -41,6 +43,33 @@ namespace FoodDelivery.DesktopUI.ViewModels
             }
         }
 
+        public bool IsErrorVisible
+        {
+            get
+            {
+                bool output = false;
+
+                if (ErrorMessage?.Length > 0)
+                {
+                    output = true;
+                }
+
+                return output;
+            }
+            set { }
+        }
+
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set
+            {
+                errorMessage = value;
+                NotifyOfPropertyChange(() => IsErrorVisible);
+                NotifyOfPropertyChange(() => ErrorMessage);
+            }
+        }
+
 
         public bool CanLogIn
         {
@@ -61,11 +90,12 @@ namespace FoodDelivery.DesktopUI.ViewModels
         {
             try
             {
+                ErrorMessage = "";
                 var result = await apiHelper.Authenticate(UserName, Password);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                ErrorMessage = ex.Message;
             }
         }
     }

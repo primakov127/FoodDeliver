@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FoodDelivery.Domain.Concrete
 {
-    public class EFOrderRepository : IOrderRepository
+    public class EFOrderRepository : IRepository<Order, int>
     {
         EFDbContext context = new EFDbContext();
 
@@ -26,7 +26,7 @@ namespace FoodDelivery.Domain.Concrete
 
         public IEnumerable<Order> GetAll()
         {
-            var x = context.Orders.ToList();
+            //var x = context.Orders.ToList();
             return context.Orders;
         }
 

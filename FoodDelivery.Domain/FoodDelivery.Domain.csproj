@@ -100,8 +100,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IOrderProcessor.cs" />
-    <Compile Include="Abstract\IOrderRepository.cs" />
     <Compile Include="Abstract\IProductRepository.cs" />
+    <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Concrete\AppIdentityDbContext.cs" />
     <Compile Include="Concrete\AppRoleManager.cs" />
     <Compile Include="Concrete\AppUserManager.cs" />
@@ -109,6 +109,7 @@
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFOrderRepository.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
+    <Compile Include="Concrete\EFStaffRepository.cs" />
     <Compile Include="Entities\AppRole.cs" />
     <Compile Include="Entities\AppUser.cs" />
     <Compile Include="Entities\Cart.cs" />
@@ -140,6 +141,14 @@
     <Compile Include="Migrations\202004281812357_AddDisplayNameProduct.designer.cs">
       <DependentUpon>202004281812357_AddDisplayNameProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005051125390_AddAuthIdToStaff.cs" />
+    <Compile Include="Migrations\202005051125390_AddAuthIdToStaff.designer.cs">
+      <DependentUpon>202005051125390_AddAuthIdToStaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005051138395_ChangeStaffTable.cs" />
+    <Compile Include="Migrations\202005051138395_ChangeStaffTable.designer.cs">
+      <DependentUpon>202005051138395_ChangeStaffTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -165,6 +174,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004281812357_AddDisplayNameProduct.resx">
       <DependentUpon>202004281812357_AddDisplayNameProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005051125390_AddAuthIdToStaff.resx">
+      <DependentUpon>202005051125390_AddAuthIdToStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005051138395_ChangeStaffTable.resx">
+      <DependentUpon>202005051138395_ChangeStaffTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

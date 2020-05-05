@@ -35,7 +35,6 @@ namespace FoodDelivery.WebUI.Infrastructure
         {
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
             kernel.Bind<IOrderProcessor>().To<DBOrderProcessor>();
-            kernel.Bind<IOrderRepository>().To<EFOrderRepository>();
         }
     }
 }

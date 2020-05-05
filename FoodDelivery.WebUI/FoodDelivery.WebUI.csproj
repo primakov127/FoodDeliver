@@ -190,6 +190,7 @@
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\WebAPI\AdminController.cs" />
+    <Compile Include="Controllers\WebAPI\StaffController.cs" />
     <Compile Include="Controllers\WebAPI\WebController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

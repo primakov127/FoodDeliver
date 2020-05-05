@@ -39,7 +39,7 @@ namespace FoodDelivery.WebUI.Controllers.WebAPI
         }
 
         [HttpPost]
-        public async Task<string> Create(string nameParam, string emailParam, string passwordParam, string roleParam)
+        public async Task<string> Create(string nameParam, string emailParam, string passwordParam, string roleParam, string phoneParam)
         {
             AppUser user = new AppUser { UserName = nameParam, Email = emailParam };
             IdentityResult result = await UserManager.CreateAsync(user, passwordParam);
@@ -47,6 +47,14 @@ namespace FoodDelivery.WebUI.Controllers.WebAPI
             if (result.Succeeded)
             {
                 UserManager.AddToRole(user.Id, roleParam);
+                EFStaffRepository staff = new EFStaffRepository();
+                staff.Add(new Staff
+                {
+                    Name = nameParam,
+                    Position = roleParam,
+                    UserId = user.Id,
+                    Phone = phoneParam
+                });
                 return "User has been created";
             }
             else
