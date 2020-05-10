@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FoodDelivery.DesktopUI.EventModels;
 using FoodDelivery.DesktopUI.Helpers;
 using FoodDelivery.DesktopUI.Library.Api;
 using FoodDelivery.DesktopUI.Library.Models;
@@ -69,7 +70,7 @@ namespace FoodDelivery.DesktopUI.ViewModels
             order.Call_UserId = callEndpoint.User.UserId;
             order.Status = "CALL";
             callEndpoint.UpdateOrder(order);
-            events.PublishOnUIThread(order);
+            events.PublishOnUIThread(new ProccesOrderEvent(order, callEndpoint));
         }
 
         private async void TimeUpdateOrderList(object sender, EventArgs e)

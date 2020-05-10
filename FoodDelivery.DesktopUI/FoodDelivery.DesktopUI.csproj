@@ -157,6 +157,7 @@
     <Compile Include="EventModels\ProccesOrderEvent.cs" />
     <Compile Include="Helpers\Command.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
+    <Compile Include="Models\CartLineModel.cs" />
     <Compile Include="Models\OrderDisplayModel.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\CallViewModel.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Caliburn.Micro;
 using FoodDelivery.DesktopUI.EventModels;
 using FoodDelivery.DesktopUI.Library.Api;
@@ -10,7 +11,7 @@ using FoodDelivery.DesktopUI.Library.Models;
 
 namespace FoodDelivery.DesktopUI.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>, IHandle<LogOutEvent>
+    public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>, IHandle<LogOutEvent>, IHandle<ProccesOrderEvent>
     {
         private IEventAggregator events;
         private ILoggedInUserModel user;
@@ -57,7 +58,7 @@ namespace FoodDelivery.DesktopUI.ViewModels
 
         public void Handle(ProccesOrderEvent message)
         {
-            ActivateItem(new OrderDisplayViewModel(message.order));
+            ActivateItem(new OrderDisplayViewModel(message.Order, container.GetInstance<IMapper>(), message.CallEndpoint, events));
         }
     }
 }

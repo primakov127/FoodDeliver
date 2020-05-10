@@ -54,5 +54,37 @@ namespace FoodDelivery.DesktopUI.Library.Api
                 }
             }
         }
+
+        public async Task<List<StaffModel>> GetAllCook()
+        {
+            using (HttpResponseMessage response = await apiHelper.ApiClient.GetAsync("/api/staff/GetAllCook"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<List<StaffModel>>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task<List<ProductModel>> GetAllProduct()
+        {
+            using (HttpResponseMessage response = await apiHelper.ApiClient.GetAsync("/api/product/GetAllProducts"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<List<ProductModel>>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

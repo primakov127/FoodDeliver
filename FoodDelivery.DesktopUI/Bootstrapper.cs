@@ -1,7 +1,9 @@
-﻿using Caliburn.Micro;
+﻿using AutoMapper;
+using Caliburn.Micro;
 using FoodDelivery.DesktopUI.Helpers;
 using FoodDelivery.DesktopUI.Library.Api;
 using FoodDelivery.DesktopUI.Library.Models;
+using FoodDelivery.DesktopUI.Models;
 using FoodDelivery.DesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,8 +29,23 @@ namespace FoodDelivery.DesktopUI
             "PasswordChanged");
         }
 
+        private IMapper ConfigureAutomapper()
+        {
+            var config = new MapperConfiguration(cnfg =>
+            {
+                cnfg.CreateMap<OrderModel, OrderDisplayModel>();
+                cnfg.CreateMap<OrderDisplayModel, OrderModel>();
+            });
+
+            var mapper = config.CreateMapper();
+
+            return mapper;
+        }
+
         protected override void Configure()
         {
+            container.Instance(ConfigureAutomapper());
+
             container.Instance(container)
                 .PerRequest<ICallEndpoint, CallEndpoint>();
 

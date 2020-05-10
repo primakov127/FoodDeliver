@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace FoodDelivery.DesktopUI.Models
         private DateTime date;
         private string call_UserId;
         private string cook_UserId;
+        private BindingList<CartLineModel> cartLines;
 
         public int Id
         {
@@ -79,5 +81,12 @@ namespace FoodDelivery.DesktopUI.Models
             get => cook_UserId;
             set => Set(ref cook_UserId, value);
         }
+
+        public BindingList<CartLineModel> CartLines
+        {
+            get => cartLines;
+            set => Set(ref cartLines, value);
+        }
+
     }
 }

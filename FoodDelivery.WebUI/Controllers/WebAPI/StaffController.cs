@@ -22,5 +22,11 @@ namespace FoodDelivery.WebUI.Controllers.WebAPI
 
             return repository.Get(userId);
         }
+
+        [Route("api/Staff/GetAllCook")]
+        public List<Staff> GetAllCook()
+        {
+            return repository.GetAll().Where(staff => staff.Position == "cook").ToList();
+        }
     }
 }

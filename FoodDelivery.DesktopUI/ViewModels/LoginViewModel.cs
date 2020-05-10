@@ -74,17 +74,7 @@ namespace FoodDelivery.DesktopUI.ViewModels
 
         public bool CanLogIn
         {
-            get
-            {
-                bool output = false;
-
-                if (userName?.Length > 0 && password?.Length > 0)
-                {
-                    output = true;
-                }
-
-                return output;
-            }
+            get => userName?.Length > 0 && password?.Length > 0;
         }
 
         public async Task LogIn()

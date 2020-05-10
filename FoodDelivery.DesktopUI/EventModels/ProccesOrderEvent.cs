@@ -1,4 +1,5 @@
-﻿using FoodDelivery.DesktopUI.Library.Models;
+﻿using FoodDelivery.DesktopUI.Library.Api;
+using FoodDelivery.DesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,13 @@ namespace FoodDelivery.DesktopUI.EventModels
 {
     public class ProccesOrderEvent
     {
-        public OrderModel order { get; set; }
+        public ProccesOrderEvent(OrderModel order, ICallEndpoint callEndpoint)
+        {
+            this.Order = order;
+            this.CallEndpoint = callEndpoint;
+        }
+
+        public OrderModel Order { get; set; }
+        public ICallEndpoint CallEndpoint { get; set; }
     }
 }

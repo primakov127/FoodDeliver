@@ -18,5 +18,6 @@ namespace FoodDelivery.DesktopUI.Library.Models
         public DateTime Date { get; set; }
         public string Call_UserId { get; set; }
         public string Cook_UserId { get; set; }
+        public List<OrderedProductsModel> OrderedProducts { get; set; }
     }
 }

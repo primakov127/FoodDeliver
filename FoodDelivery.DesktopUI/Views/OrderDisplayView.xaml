@@ -3,34 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
              mc:Ignorable="d" MinHeight="450" MinWidth="800" FontFamily="Segoe UI Light"
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="16*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="22*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Grid.Row="0" Fill="{DynamicResource AccentColorBrush}"/>
-        <TextBlock Grid.Row="0" Text="Proccesing Order"
+        <Separator Grid.Row="0" Margin="0" Background="#4B562B" />
+        <Grid Grid.Row="1" Background="{DynamicResource AccentColorBrush}">
+            <TextBlock Grid.Row="1" Text="Proccesing Order" VerticalAlignment="Center"
                    FontSize="36" HorizontalAlignment="Center" />
+        </Grid>
+        
+        <Separator Grid.Row="2" Margin="0" Background="#4B562B"/>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
 
             <!--#region Order information -->
             
             <Rectangle Grid.Column="0" Fill="WhiteSmoke"/>
-            <StackPanel Grid.Column="0" Margin="20 0 20 20">
+            <StackPanel Grid.Column="0" Margin="20 0 20 20" VerticalAlignment="Center">
                 <TextBlock Text="Order Informatiom" FontSize="24"
                            HorizontalAlignment="Center" Margin="10"/>
 
-                <Grid DataContext="{Binding Order}">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition/>
@@ -46,33 +53,35 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Client Name:" FontSize="20" Margin="5"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding ClientName}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Order.ClientName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Client Addres:" FontSize="20" Margin="5"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Order.ClientAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Client Phone:" FontSize="20" Margin="5"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding Order.ClientPhone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Comment:" FontSize="20" Margin="5"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Margin="5"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Order.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Date:" FontSize="20" Margin="5"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Margin="5"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding Order.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="Cook:" FontSize="20" Margin="5"/>
-                    <ComboBox Grid.Row="5" Grid.Column="1" Margin="5"/>
+                    <ComboBox Grid.Row="5" Grid.Column="1" Margin="5" ItemsSource="{Binding Cook}"
+                              SelectedValuePath="UserId" DisplayMemberPath="Name" 
+                              SelectedValue="{Binding Order.Cook_UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 </Grid>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Total cost:" FontSize="30"/>
-                    <TextBlock Margin="10 0" FontSize="30"/>
+                    <TextBlock Text="{Binding Order.TotalCost}" Margin="10 0" FontSize="30"/>
                 </StackPanel>
 
-                <Button Content="Confirm" FontSize="20" HorizontalAlignment="Center"
+                <Button x:Name="Confirm" Content="Confirm" FontSize="20" 
                         Style="{StaticResource SquareButtonStyle}" MinWidth="200"
-                        Margin="20"/>
+                        Margin="20" HorizontalAlignment="Center"/>
 
 
 
@@ -80,9 +89,88 @@
 
             <!--#endregion-->
 
-            <StackPanel Grid.Column="1" Margin="10">
-                
-            </StackPanel>
+            <Grid Grid.Column="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl>
+                        f
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" BorderBrush="Black"
+                                    Padding="5" Margin="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="40"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0"/>
+                                        
+                                        <TextBlock Grid.Column="1"/>
+                                        
+                                        <Button Grid.Column="2" Margin="5" 
+                                            Style="{DynamicResource SquareButtonStyle}">
+                                            <iconPacks:PackIconMaterialDesign Kind="Add"/>
+                                        </Button>
+                                        
+                                        <Button Grid.Column="3" Margin="5" 
+                                            Style="{DynamicResource SquareButtonStyle}">
+                                            <iconPacks:PackIconMicrons Kind="Minus" />
+                                        </Button>
+                                        
+                                        <Button Grid.Column="4" Margin="5" 
+                                            Style="{DynamicResource SquareButtonStyle}">
+                                            <iconPacks:PackIconIonicons Kind="CloseMD" Foreground="Red" />
+                                        </Button>
+
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <Separator Grid.Row="1"/>
+                <Grid Grid.Row="2" Height="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox Grid.Column="0" Margin="5" ItemsSource="{Binding Products}"
+                              SelectedValuePath="Id" DisplayMemberPath="Name"/>
+                    
+                    <TextBlock Grid.Column="1"/>
+                    
+                    <Button Grid.Column="2" Margin="5"
+                            Style="{DynamicResource SquareButtonStyle}">
+                        <iconPacks:PackIconMaterialDesign Kind="Add"/>
+                    </Button>
+
+                    <Button Grid.Column="3" Margin="5"
+                            Style="{DynamicResource SquareButtonStyle}">
+                        <iconPacks:PackIconMicrons Kind="Minus" />
+                    </Button>
+
+                    <Button Grid.Column="4" Margin="5"
+                            Style="{DynamicResource SquareButtonStyle}">
+                        <iconPacks:PackIconMaterial Kind="CartArrowDown" Foreground="Green"/>
+                    </Button>
+
+                </Grid>
+
+            </Grid>
 
         </Grid>
 
