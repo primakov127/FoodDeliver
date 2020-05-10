@@ -14,8 +14,17 @@ namespace FoodDelivery.Domain.Concrete
         public void ProcessOrder(Cart cart, Order order)
         {
             EFDbContext context = new EFDbContext();
+
+            decimal totalCost = 0;
+            foreach(var cartLine in cart.Lines)
+            {
+                totalCost += (cartLine.Product.Price * cartLine.Quantity);
+            }
+
+            order.TotalCost = totalCost;
             order.Status = "NEW";
             order.Date = DateTime.Now;
+
             context.Orders.Add(order);
             context.SaveChanges();
             foreach (var line in cart.Lines)

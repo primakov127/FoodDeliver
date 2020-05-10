@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,18 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FoodDelivery.DesktopUI.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ShellView.xaml
+    /// Логика взаимодействия для CallView.xaml
     /// </summary>
-    public partial class ShellView : MetroWindow
+    public partial class CallView : UserControl
     {
-        public ShellView()
+        public CallView()
         {
             InitializeComponent();
         }
+
     }
 }

@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace FoodDelivery.WebUI.Controllers.WebAPI
 {
+    [Authorize]
     public class StaffController : ApiController
     {
         private IRepository<Staff, string> repository = new EFStaffRepository();

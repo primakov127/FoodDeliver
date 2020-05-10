@@ -30,6 +30,11 @@ namespace FoodDelivery.Domain.Concrete
             return context.Orders;
         }
 
+        public List<Order> GetNewOrders()
+        {
+            return context.Orders.Where(order => order.Status == "NEW").ToList();
+        }
+
         public void Remove(int id)
         {
             Order order = Get(id);
@@ -51,8 +56,8 @@ namespace FoodDelivery.Domain.Concrete
                 storedOrder.Comment = order.Comment;
                 storedOrder.Status = order.Status;
                 storedOrder.Date = order.Date;
-                storedOrder.Call = order.Call;
-                storedOrder.Cook = order.Cook;
+                storedOrder.Call_UserId = order.Call_UserId;
+                storedOrder.Cook_UserId = order.Cook_UserId;
                 context.SaveChanges();
                 return true;
             }

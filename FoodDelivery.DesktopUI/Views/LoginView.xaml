@@ -3,53 +3,84 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
              mc:Ignorable="d" Background="White" FontSize="24"
-             d:DesignHeight="425" d:DesignWidth="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+             d:DesignHeight="450" d:DesignWidth="400"
+             MinHeight="450" MinWidth="400">
+    <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 0 20"
-                   HorizontalAlignment="Center" FontSize="64" FontFamily="Segoe UI Light">
-            Login Form
-        </TextBlock>
-        
-        <!-- Error Message row -->
-        <TextBlock x:Name="ErrorMessage" Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"
-                   Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
-                   Foreground="Red" MaxWidth="300"
-                   TextWrapping="Wrap" Margin="0 0 0 20" />
 
-        <!-- Username row -->
-        <TextBlock Grid.Row="2" Grid.Column="1" Margin="0 0 5 10">
-            Username:
-        </TextBlock>
-        <TextBox x:Name="UserName" Grid.Row="2" Grid.Column="2"
-                 MinWidth="350" Margin="0 0 0 10" />
+        <!--#region Main label -->
         
-        <!-- Password row -->
-        <TextBlock Grid.Row="3" Grid.Column="1" Margin="0 0 5 20">
-            Password:
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center"
+                   FontSize="64" FontFamily="Segoe UI Light">
+            Food Delivery
         </TextBlock>
-        <PasswordBox x:Name="Password" Grid.Row="3" Grid.Column="2"
-                     MinWidth="350" Margin="0 0 0 20" />
         
-        <!-- Login row -->
-        <Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Padding="20 5"
-                HorizontalAlignment="Center" x:Name="LogIn">
+        <!--#endregion-->
+        
+        <!--#region Username row -->
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Center" Margin="0 0 0 10">
+            
+            <iconPacks:PackIconMaterial Kind="Account" VerticalAlignment="Center"/>
+            
+            <TextBox x:Name="UserName" Width="250"
+                     FontSize="20" Margin="5 0"
+                     mah:TextBoxHelper.ClearTextButton="{Binding Path=(mah:TextBoxHelper.HasText),RelativeSource= {RelativeSource Mode=Self}}"
+                     mah:TextBoxHelper.Watermark="Login"/>
+            
+        </StackPanel>
+        
+        <!--#endregion-->
+
+        <!--#region Password row -->
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal" 
+                    HorizontalAlignment="Center">
+            
+            <iconPacks:PackIconFontAwesome Kind="LockSolid" VerticalAlignment="Center"/>
+            
+            <PasswordBox x:Name="Password" Width="250"
+                         FontSize="20" Margin="5 0" 
+                         mah:TextBoxHelper.ClearTextButton="{Binding Path=(mah:TextBoxHelper.HasText),RelativeSource= {RelativeSource Mode=Self}}"
+                         mah:TextBoxHelper.Watermark="Password"/>
+            
+        </StackPanel>
+        
+        <!--#endregion-->
+        
+        <!--#region Login Button-->
+        
+        <Button Grid.Row="4" Width="100" Height="30" FontSize="12"
+                HorizontalAlignment="Center" x:Name="LogIn"
+                Style="{DynamicResource SquareButtonStyle}">
             Log In
         </Button>
+        
+        <!--#endregion-->
+
+        <!--#region Error row -->
+        
+        <Border BorderBrush="Red" Grid.Row="5" BorderThickness="2" VerticalAlignment="Center"
+                Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+            <TextBlock x:Name="ErrorMessage" VerticalAlignment="Center"
+                       Foreground="Red" Margin="10" FontSize="16" HorizontalAlignment="Center"
+                       TextWrapping="Wrap"/>
+        </Border>
+        
+        <!--#endregion-->
+        
     </Grid>
 </UserControl>

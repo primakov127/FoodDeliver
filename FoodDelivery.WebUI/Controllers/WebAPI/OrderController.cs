@@ -11,11 +11,16 @@ using System.Web.Http;
 namespace FoodDelivery.WebUI.Controllers.WebAPI
 {
     [Authorize]
-    public class WebController : ApiController
+    public class OrderController : ApiController
     {
         private IRepository<Order, int> repository = new EFOrderRepository();
 
-        [Authorize]
+        [Route("api/Order/GetAllNewOrders")]
+        public List<Order> GetAllNewOrders()
+        {
+            return ((EFOrderRepository)repository).GetNewOrders();
+        }
+        
         public IEnumerable<Order> GetAllOrders()
         {
             return repository.GetAll();
@@ -26,13 +31,15 @@ namespace FoodDelivery.WebUI.Controllers.WebAPI
             return repository.Get(id);
         }
 
-        public Order PostReservation(Order order)
+        public Order AddOrder(Order order)
         {
             return repository.Add(order);
         }
 
-        public bool PutOrder(Order order)
+        [HttpPut]
+        public bool UpdateOrder(Order order)
         {
+            
             return repository.Update(order);
         }
 

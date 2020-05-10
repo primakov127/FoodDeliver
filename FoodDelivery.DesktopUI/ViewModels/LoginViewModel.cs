@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
-using FoodDelivery.DesktopUI.Helpers;
+using FoodDelivery.DesktopUI.EventModels;
+using FoodDelivery.DesktopUI.Library.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,13 @@ namespace FoodDelivery.DesktopUI.ViewModels
         private string userName;
         private string password;
         private IAPIHelper apiHelper;
-        private bool isErrorVisible;
+        private IEventAggregator events;
         private string errorMessage;
 
-        public LoginViewModel(IAPIHelper apiHelper)
+        public LoginViewModel(IAPIHelper apiHelper, IEventAggregator events)
         {
             this.apiHelper = apiHelper;
+            this.events = events;
         }
 
         public string UserName
@@ -56,7 +58,6 @@ namespace FoodDelivery.DesktopUI.ViewModels
 
                 return output;
             }
-            set { }
         }
 
         public string ErrorMessage
@@ -92,6 +93,11 @@ namespace FoodDelivery.DesktopUI.ViewModels
             {
                 ErrorMessage = "";
                 var result = await apiHelper.Authenticate(UserName, Password);
+
+                // Capture more information about the User
+                var user = await apiHelper.GetLoggedInUserInfo(result.Access_Token);
+
+                events.PublishOnUIThread(new LogOnEvent());
             }
             catch (Exception ex)
             {

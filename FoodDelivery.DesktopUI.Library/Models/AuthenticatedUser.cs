@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodDelivery.DesktopUI.Models
+namespace FoodDelivery.DesktopUI.Library.Models
 {
     public class AuthenticatedUser
     {

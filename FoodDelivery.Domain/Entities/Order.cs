@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodDelivery.Domain.Entities
 {
-    [Serializable]
     [Table("Orders")]
     public class Order
     {
@@ -24,11 +23,18 @@ namespace FoodDelivery.Domain.Entities
         [Required(ErrorMessage = "Укажите номер телефона")]
         public string ClientPhone { get; set; }
 
+        public decimal TotalCost { get; set; }
         public string Comment { get; set; }
         public string Status { get; set; }
         public DateTime Date { get; set; }
-        public Staff Call { get; set; }
-        public Staff Cook { get; set; }
+        public string Call_UserId { get; set; }
+        public string Cook_UserId { get; set; }
+
+        [ForeignKey("Call_UserId")]
+        public virtual Staff Call { get; set; }
+
+        [ForeignKey("Cook_UserId")]
+        public virtual Staff Cook { get; set; }
 
         public virtual ICollection<OrderedProducts> OrderedProducts { get; set; }
     }

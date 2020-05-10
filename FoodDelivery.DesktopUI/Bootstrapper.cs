@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using FoodDelivery.DesktopUI.Helpers;
+using FoodDelivery.DesktopUI.Library.Api;
+using FoodDelivery.DesktopUI.Library.Models;
 using FoodDelivery.DesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,11 +29,13 @@ namespace FoodDelivery.DesktopUI
 
         protected override void Configure()
         {
-            container.Instance(container);
+            container.Instance(container)
+                .PerRequest<ICallEndpoint, CallEndpoint>();
 
             container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<ILoggedInUserModel, LoggedInUserModel>()
                 .Singleton<IAPIHelper, APIHelper>();
 
             GetType().Assembly.GetTypes()
