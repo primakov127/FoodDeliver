@@ -4,10 +4,7 @@ using FoodDelivery.DesktopUI.Helpers;
 using FoodDelivery.DesktopUI.Library.Api;
 using FoodDelivery.DesktopUI.Library.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
@@ -26,8 +23,8 @@ namespace FoodDelivery.DesktopUI.ViewModels
             this.MenuViewModel = menu;
             this.events = events;
 
-            AcceptCommand = new Command(Accept, x => true);
-            timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(5)};
+            AcceptCommand = new Command(Accept, _ => true);
+            timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
             timer.Tick += TimeUpdateOrderList;
         }
 

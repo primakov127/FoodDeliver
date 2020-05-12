@@ -48,23 +48,52 @@ namespace FoodDelivery.Domain.Concrete
         public bool Update(Order order)
         {
             Order storedOrder = Get(order.Id);
-            if (storedOrder != null)
-            {
-                storedOrder.ClientName = order.ClientName;
-                storedOrder.ClientAddress = order.ClientAddress;
-                storedOrder.ClientPhone = order.ClientPhone;
-                storedOrder.Comment = order.Comment;
-                storedOrder.Status = order.Status;
-                storedOrder.Date = order.Date;
-                storedOrder.Call_UserId = order.Call_UserId;
-                storedOrder.Cook_UserId = order.Cook_UserId;
-                context.SaveChanges();
-                return true;
-            }
-            else
+
+            if (storedOrder == null)
             {
                 return false;
             }
+
+            storedOrder.ClientName = order.ClientName;
+            storedOrder.ClientAddress = order.ClientAddress;
+            storedOrder.ClientPhone = order.ClientPhone;
+            storedOrder.Comment = order.Comment;
+            storedOrder.Status = order.Status;
+            storedOrder.Date = order.Date;
+            storedOrder.Call_UserId = order.Call_UserId;
+            storedOrder.Cook_UserId = order.Cook_UserId;
+            storedOrder.TotalCost = order.TotalCost;
+            
+
+            if (order.OrderedProducts != null)
+            {
+                // Update stored Order
+                foreach (var orderedProduct in storedOrder.OrderedProducts.ToList())
+                {
+                    var matchingLine = order.OrderedProducts.Where(orderLine => orderLine.ProductId == orderedProduct.ProductId).FirstOrDefault();
+                    if (matchingLine != null)
+                    {
+                        orderedProduct.Quantity = matchingLine.Quantity;
+                    }
+                    else
+                    {
+                        storedOrder.OrderedProducts.Remove(orderedProduct);
+                    }
+                }
+
+                // Update stored Order with added products
+                foreach (var product in order.OrderedProducts)
+                {
+                    var mathcingLine = storedOrder.OrderedProducts.Where(orderLine => orderLine.ProductId == product.ProductId).FirstOrDefault();
+                    if (mathcingLine == null)
+                    {
+                        storedOrder.OrderedProducts.Add(product);
+                    }
+                }
+            }
+
+            context.SaveChanges();
+            return true;
         }
     }
 }

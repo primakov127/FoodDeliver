@@ -33,8 +33,14 @@ namespace FoodDelivery.DesktopUI
         {
             var config = new MapperConfiguration(cnfg =>
             {
-                cnfg.CreateMap<OrderModel, OrderDisplayModel>();
-                cnfg.CreateMap<OrderDisplayModel, OrderModel>();
+                cnfg.CreateMap<OrderedProductsModel, CartLineModel>()
+                .ReverseMap();
+
+                cnfg.CreateMap<OrderModel, OrderDisplayModel>()
+                .ForMember(dest => dest.CartLines, opt => opt.MapFrom(src => src.OrderedProducts))
+                .ReverseMap();
+
+
             });
 
             var mapper = config.CreateMapper();

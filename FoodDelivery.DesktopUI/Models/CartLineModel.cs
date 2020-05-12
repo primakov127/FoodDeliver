@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,28 @@ using System.Threading.Tasks;
 
 namespace FoodDelivery.DesktopUI.Models
 {
-    public class CartLineModel
+    public class CartLineModel : PropertyChangedBase
     {
-        public int OrderId { get; set; }
-        public int ProductId { get; set; }
-        public int Quantity { get; set; }
+        private int orderId;
+        private int productId;
+        private int quantity;
+
+        public int OrderId
+        {
+            get => orderId;
+            set => Set(ref orderId, value);
+        }
+
+        public int ProductId
+        {
+            get => productId;
+            set => Set(ref productId, value);
+        }
+
+        public int Quantity
+        {
+            get => quantity;
+            set => Set(ref quantity, value);
+        }
     }
 }

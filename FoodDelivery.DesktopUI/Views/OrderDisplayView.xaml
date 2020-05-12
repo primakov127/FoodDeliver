@@ -5,8 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
+             xmlns:converter="clr-namespace:FoodDelivery.DesktopUI.Helpers"
              mc:Ignorable="d" MinHeight="450" MinWidth="800" FontFamily="Segoe UI Light"
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White" x:Name="OrderDisplayControl">
+    <UserControl.Resources>
+        <converter:ProductIdToNameConverter x:Key="idConverter"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -20,18 +25,18 @@
             <TextBlock Grid.Row="1" Text="Proccesing Order" VerticalAlignment="Center"
                    FontSize="36" HorizontalAlignment="Center" />
         </Grid>
-        
+
         <Separator Grid.Row="2" Margin="0" Background="#4B562B"/>
 
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
 
             <!--#region Order information -->
-            
+
             <Rectangle Grid.Column="0" Fill="WhiteSmoke"/>
             <StackPanel Grid.Column="0" Margin="20 0 20 20" VerticalAlignment="Center">
                 <TextBlock Text="Order Informatiom" FontSize="24"
@@ -76,7 +81,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Total cost:" FontSize="30"/>
-                    <TextBlock Text="{Binding Order.TotalCost}" Margin="10 0" FontSize="30"/>
+                    <TextBlock Text="{Binding Order.TotalCost, Mode=TwoWay, StringFormat={}{0} руб.}" Margin="10 0" FontSize="30"/>
                 </StackPanel>
 
                 <Button x:Name="Confirm" Content="Confirm" FontSize="20" 
@@ -97,8 +102,7 @@
                 </Grid.RowDefinitions>
 
                 <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl>
-                        f
+                    <ItemsControl ItemsSource="{Binding Order.CartLines, Mode=TwoWay}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderThickness="1" BorderBrush="Black"
@@ -112,22 +116,34 @@
                                             <ColumnDefinition Width="40"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Grid.Column="0"/>
-                                        
-                                        <TextBlock Grid.Column="1"/>
-                                        
-                                        <Button Grid.Column="2" Margin="5" 
-                                            Style="{DynamicResource SquareButtonStyle}">
+                                        <TextBlock Grid.Column="0" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"
+                                                   VerticalAlignment="Center">
+                                            <TextBlock.Text>
+                                                <MultiBinding Converter="{StaticResource idConverter}">
+                                                    <Binding Path="ProductId"/>
+                                                    <Binding ElementName="OrderDisplayControl" Path="DataContext.Products"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+
+                                        <TextBlock Grid.Column="1" Text="{Binding Quantity, Mode=TwoWay}" Margin="10 0"
+                                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                                        <Button Grid.Column="2" Margin="5" CommandParameter="{Binding Path=.}"
+                                                Command="{Binding DataContext.IncreaseProductQuantityCommand, ElementName=OrderDisplayControl}"
+                                                Style="{DynamicResource SquareButtonStyle}">
                                             <iconPacks:PackIconMaterialDesign Kind="Add"/>
                                         </Button>
-                                        
-                                        <Button Grid.Column="3" Margin="5" 
-                                            Style="{DynamicResource SquareButtonStyle}">
+
+                                        <Button Grid.Column="3" Margin="5" CommandParameter="{Binding Path=.}"
+                                                Command="{Binding DataContext.ReduceProductQuantityCommand, ElementName=OrderDisplayControl}"
+                                                Style="{DynamicResource SquareButtonStyle}">
                                             <iconPacks:PackIconMicrons Kind="Minus" />
                                         </Button>
-                                        
-                                        <Button Grid.Column="4" Margin="5" 
-                                            Style="{DynamicResource SquareButtonStyle}">
+
+                                        <Button Grid.Column="4" Margin="5" CommandParameter="{Binding Path=.}"
+                                                Command="{Binding DataContext.RemoveProductFromCartCommand, ElementName=OrderDisplayControl}"
+                                                Style="{DynamicResource SquareButtonStyle}">
                                             <iconPacks:PackIconIonicons Kind="CloseMD" Foreground="Red" />
                                         </Button>
 
@@ -139,7 +155,7 @@
                 </ScrollViewer>
 
                 <Separator Grid.Row="1"/>
-                <Grid Grid.Row="2" Height="40">
+                <Grid Grid.Row="2" Height="40" DataContext="{Binding NewCartLine}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="40"/>
@@ -148,22 +164,28 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
 
-                    <ComboBox Grid.Column="0" Margin="5" ItemsSource="{Binding Products}"
-                              SelectedValuePath="Id" DisplayMemberPath="Name"/>
-                    
-                    <TextBlock Grid.Column="1"/>
-                    
+                    <ComboBox Grid.Column="0" Margin="5" ItemsSource="{Binding DataContext.Products, ElementName=OrderDisplayControl}"
+                              SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding ProductId, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Column="1" Text="{Binding Quantity}" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+
                     <Button Grid.Column="2" Margin="5"
-                            Style="{DynamicResource SquareButtonStyle}">
+                            Style="{DynamicResource SquareButtonStyle}"
+                            Command="{Binding ElementName=OrderDisplayControl, Path=DataContext.IncreaseProductQuantityCommand}"
+                            CommandParameter="{Binding Path=.}">
                         <iconPacks:PackIconMaterialDesign Kind="Add"/>
                     </Button>
 
                     <Button Grid.Column="3" Margin="5"
-                            Style="{DynamicResource SquareButtonStyle}">
+                            Style="{DynamicResource SquareButtonStyle}"
+                            Command="{Binding DataContext.ReduceProductQuantityCommand, ElementName=OrderDisplayControl}"
+                            CommandParameter="{Binding Path=.}">
                         <iconPacks:PackIconMicrons Kind="Minus" />
                     </Button>
 
-                    <Button Grid.Column="4" Margin="5"
+                    <Button x:Name="AddNewCartLineToOrder" Grid.Column="4" Margin="5"
                             Style="{DynamicResource SquareButtonStyle}">
                         <iconPacks:PackIconMaterial Kind="CartArrowDown" Foreground="Green"/>
                     </Button>
