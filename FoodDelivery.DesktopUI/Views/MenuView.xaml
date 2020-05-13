@@ -3,20 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"  FontFamily="{DynamicResource Segou}"
              d:DesignHeight="450" d:DesignWidth="230">
-    
-    <Grid Background="WhiteSmoke">
+
+    <Grid Style="{DynamicResource MenuGridAnimation}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="LogOut" Grid.Row="1" Margin="10 5 10 10"
-                    Style="{DynamicResource SquareButtonStyle}" FontSize="16">
-            Log Out
+        <Rectangle Grid.Row="0" Fill="#7A8654"/>
+        <ToggleButton x:Name="MenuToggleButton" Grid.Row="0" HorizontalAlignment="Right"
+                      Style="{DynamicResource MenuToggleButton}" />
+        
+
+
+        <Button x:Name="LogOut" Grid.Row="2" Style="{DynamicResource MenuButton}">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconBoxIcons Kind="RegularLogOut" VerticalAlignment="Center"
+                                            Foreground="Red" Margin="5 0"/>
+                <TextBlock Text="LogOut" Margin="5 0"/>
+            </StackPanel>
         </Button>
+
+        
 
     </Grid>
 </UserControl>

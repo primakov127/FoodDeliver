@@ -6,7 +6,7 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
              xmlns:converter="clr-namespace:FoodDelivery.DesktopUI.Helpers"
-             mc:Ignorable="d" MinHeight="450" MinWidth="800" FontFamily="Segoe UI Light"
+             mc:Ignorable="d" MinHeight="450" MinWidth="800" FontFamily="{DynamicResource Segou}"
              d:DesignHeight="450" d:DesignWidth="800" Background="White" x:Name="OrderDisplayControl">
     <UserControl.Resources>
         <converter:ProductIdToNameConverter x:Key="idConverter"/>
@@ -15,20 +15,15 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="22*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Separator Grid.Row="0" Margin="0" Background="#4B562B" />
-        <Grid Grid.Row="1" Background="{DynamicResource AccentColorBrush}">
+        <Grid Grid.Row="0" Background="#767F60" Margin="10 10 10 0">
             <TextBlock Grid.Row="1" Text="Proccesing Order" VerticalAlignment="Center"
-                   FontSize="36" HorizontalAlignment="Center" />
+                   FontSize="36" HorizontalAlignment="Center" Margin="0 0 0 5"/>
         </Grid>
 
-        <Separator Grid.Row="2" Margin="0" Background="#4B562B"/>
-
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -37,7 +32,7 @@
 
             <!--#region Order information -->
 
-            <Rectangle Grid.Column="0" Fill="WhiteSmoke"/>
+            <Rectangle Grid.Column="0" Fill="WhiteSmoke" Margin="10 0"/>
             <StackPanel Grid.Column="0" Margin="20 0 20 20" VerticalAlignment="Center">
                 <TextBlock Text="Order Informatiom" FontSize="24"
                            HorizontalAlignment="Center" Margin="10"/>

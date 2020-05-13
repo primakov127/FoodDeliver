@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views" FontFamily="Segoe UI Light"
+             xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views" FontFamily="{DynamicResource Segou}"
              mc:Ignorable="d" Background="White" MinHeight="450" MinWidth="800"
-             d:DesignHeight="450" d:DesignWidth="800" x:Name="CallWindow">
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="CallControl">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
 
@@ -17,29 +17,62 @@
         <!--<local:MenuView x:Name="MenuViewModel" Grid.Column="0" Visibility="Visible"/>-->
         <ContentControl x:Name="MenuViewModel" Grid.Column="0"/>
 
-        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Padding="10">
-            <ItemsControl x:Name="Orders">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Margin="5" Padding="10" BorderThickness="1" CornerRadius="4" BorderBrush="Black">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Column="0" Text="{Binding Id}"/>
-                                <TextBlock Grid.Column="1" Text="{Binding Date}"/>
-                                <Button Command="{Binding DataContext.AcceptCommand, ElementName=CallWindow}"
-                                    CommandParameter="{Binding Path=.}"
-                                    Grid.Column="2" Content="Accept" Background="LightCoral"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+            <Grid Grid.Row="0" Background="#767F60" Margin="10 10 10 5">
+                <TextBlock Grid.Row="1" Text="Incoming Orders" VerticalAlignment="Center"
+                           FontSize="36" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="20 0 20 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Id" Foreground="Gray"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Text="Date" Foreground="Gray"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            </Grid>
+
+
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Padding="10 0 10 10">
+                <ItemsControl x:Name="Orders">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="5 0 5 10" Padding="5" BorderThickness="1"
+                                    BorderBrush="Black" Background="WhiteSmoke">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Column="0" Text="{Binding Id}" 
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Date}"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Button Command="{Binding DataContext.AcceptCommand, ElementName=CallControl}"
+                                            CommandParameter="{Binding Path=.}" Style="{DynamicResource SquareButtonStyle}"
+                                            Grid.Column="2" Content="Procces" FontSize="14" Background="#FFF4DE"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+        </Grid>
+        
         
         
 

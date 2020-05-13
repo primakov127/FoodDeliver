@@ -4,9 +4,85 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
-             mc:Ignorable="d" Background="Red" Width="800" Height="450"
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" MinHeight="450" MinWidth="800" Background="White"
+             d:DesignHeight="450" d:DesignWidth="800" FontFamily="{DynamicResource Segou}">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="#767F60" Margin="10 10 10 5">
+                <TextBlock Grid.Row="1" Text="Incoming Orders" VerticalAlignment="Center"
+                           FontSize="36" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+            </Grid>
+
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Padding="10 0 10 10">
+                <ItemsControl x:Name="Orders">
+                    d
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5 0 5 10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Border Grid.Row="0" Padding="5"
+                                        BorderThickness="1" BorderBrush="Black" Background="WhiteSmoke">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="5*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="{Binding ClientAddress}"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding TotalCost, StringFormat={}{0} руб.}"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Button Command="{Binding DataContext.AcceptCommand, ElementName=CallControl}"
+                                                CommandParameter="{Binding Path=.}" Style="{DynamicResource SquareButtonStyle}"
+                                                Grid.Column="2" Content="Ready" FontSize="14" Background="#FFF4DE"/>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Row="1" Margin="10 0 10 0"
+                                        BorderThickness="1" BorderBrush="Black" Background="LightGray">
+                                    <ItemsControl ItemsSource="{Binding CartLines, Mode=TwoWay}">
+                                        f
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock Grid.Column="0"/>
+
+                                                    <TextBlock Grid.Column="1" Text="{Binding Quantity}"/>
+
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Border>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+        </Grid>
             
     </Grid>
 </UserControl>

@@ -7,7 +7,7 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
              mc:Ignorable="d" Background="White" FontSize="24"
-             d:DesignHeight="450" d:DesignWidth="400"
+             d:DesignHeight="450" d:DesignWidth="400" FontFamily="{DynamicResource Segou}"
              MinHeight="450" MinWidth="400">
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -22,8 +22,7 @@
 
         <!--#region Main label -->
         
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center"
-                   FontSize="64" FontFamily="Segoe UI Light">
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="64">
             Food Delivery
         </TextBlock>
         
