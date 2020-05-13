@@ -1,6 +1,7 @@
 ﻿using FoodDelivery.Domain.Abstract;
 using FoodDelivery.Domain.Concrete;
 using FoodDelivery.Domain.Entities;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,14 @@ namespace FoodDelivery.WebUI.Controllers.WebAPI
         public List<Order> GetAllNewOrders()
         {
             return ((EFOrderRepository)repository).GetNewOrders();
+        }
+
+        [Route("api/Order/GetOneCookOrders")]
+        public List<Order> GetOneCookOrders()
+        {
+            string userId = RequestContext.Principal.Identity.GetUserId();
+
+            return ((EFOrderRepository)repository).GetOrdersByCookId(userId);
         }
         
         public IEnumerable<Order> GetAllOrders()

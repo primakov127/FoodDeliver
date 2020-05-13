@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Api\APIHelper.cs" />
     <Compile Include="Api\CallEndpoint.cs" />
+    <Compile Include="Api\CookEndpoint.cs" />
     <Compile Include="Api\IAPIHelper.cs" />
     <Compile Include="Api\ICallEndpoint.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
