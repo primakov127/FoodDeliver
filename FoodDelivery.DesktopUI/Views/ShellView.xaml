@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
         mc:Ignorable="d" FontSize="18" SizeToContent="WidthAndHeight"
-        Title="Food Delivery" Height="450" Width="800" MinHeight="450" MinWidth="800">
+        Title="Food Delivery" MinHeight="450" MinWidth="800">
     <Grid>
         <ContentControl x:Name="ActiveItem"/>
     </Grid>

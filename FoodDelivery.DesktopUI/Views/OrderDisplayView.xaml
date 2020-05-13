@@ -8,9 +8,6 @@
              xmlns:converter="clr-namespace:FoodDelivery.DesktopUI.Helpers"
              mc:Ignorable="d" MinHeight="450" MinWidth="800" FontFamily="{DynamicResource Segou}"
              d:DesignHeight="450" d:DesignWidth="800" Background="White" x:Name="OrderDisplayControl">
-    <UserControl.Resources>
-        <converter:ProductIdToNameConverter x:Key="idConverter"/>
-    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>

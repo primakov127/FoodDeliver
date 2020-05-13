@@ -40,11 +40,7 @@ namespace FoodDelivery.DesktopUI.ViewModels
         public BindingList<OrderModel> Orders
         {
             get => orders;
-            set
-            {
-                orders = value;
-                NotifyOfPropertyChange(() => Orders);
-            }
+            set => Set(ref orders, value);
         }
 
         protected override async void OnViewLoaded(object view)

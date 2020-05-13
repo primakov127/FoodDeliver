@@ -37,7 +37,7 @@ namespace FoodDelivery.Domain.Concrete
 
         public List<Order> GetOrdersByCookId(string cookId)
         {
-            return context.Orders.Where(order => order.Cook_UserId == cookId).ToList();
+            return context.Orders.Where(order => order.Cook_UserId == cookId && order.Status == "COOK").ToList();
         }
 
         public void Remove(int id)

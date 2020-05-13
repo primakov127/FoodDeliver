@@ -44,7 +44,7 @@
             </Grid>
 
 
-            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Padding="10 0 10 10">
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10 0 10 10">
                 <ItemsControl x:Name="Orders">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

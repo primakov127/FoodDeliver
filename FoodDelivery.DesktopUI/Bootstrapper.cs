@@ -53,7 +53,8 @@ namespace FoodDelivery.DesktopUI
             container.Instance(ConfigureAutomapper());
 
             container.Instance(container)
-                .PerRequest<ICallEndpoint, CallEndpoint>();
+                .PerRequest<ICallEndpoint, CallEndpoint>()
+                .PerRequest<ICookEndpoint, CookEndpoint>();
 
             container
                 .Singleton<IWindowManager, WindowManager>()

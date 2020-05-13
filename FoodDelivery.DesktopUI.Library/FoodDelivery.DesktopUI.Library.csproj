@@ -53,6 +53,7 @@
     <Compile Include="Api\CookEndpoint.cs" />
     <Compile Include="Api\IAPIHelper.cs" />
     <Compile Include="Api\ICallEndpoint.cs" />
+    <Compile Include="Api\ICookEndpoint.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\ILoggedInUserModel.cs" />

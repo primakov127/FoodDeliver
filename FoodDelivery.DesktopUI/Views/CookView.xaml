@@ -4,85 +4,103 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
-             mc:Ignorable="d" MinHeight="450" MinWidth="800" Background="White"
+             mc:Ignorable="d" MinHeight="450" MinWidth="800" Background="White" x:Name="CookControl"
              d:DesignHeight="450" d:DesignWidth="800" FontFamily="{DynamicResource Segou}">
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <ContentControl x:Name="MenuViewModel" Grid.Column="0"/>
+
         <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" Background="#767F60" Margin="10 10 10 5">
-                <TextBlock Grid.Row="1" Text="Incoming Orders" VerticalAlignment="Center"
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Background="#767F60" Margin="10 10 10 5">
+                    <TextBlock Grid.Row="1" Text="Incoming Orders" VerticalAlignment="Center"
                            FontSize="36" HorizontalAlignment="Center" Margin="0 0 0 5"/>
-            </Grid>
+                </Grid>
 
-            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Padding="10 0 10 10">
-                <ItemsControl x:Name="Orders">
-                    d
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="5 0 5 10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" 
+                              Margin="10 0 10 10">
+                    <ItemsControl x:Name="Orders">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5 0 5 10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
 
-                                <Border Grid.Row="0" Padding="5"
+                                    <Border Grid.Row="0" Padding="5"
                                         BorderThickness="1" BorderBrush="Black" Background="WhiteSmoke">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="5*"/>
-                                            <ColumnDefinition Width="2*"/>
-                                        </Grid.ColumnDefinitions>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="200"/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <TextBlock Grid.Column="0" Text="{Binding ClientAddress}"
+                                            <TextBlock Grid.Column="0" Text="{Binding ClientAddress}"
                                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="1" Text="{Binding TotalCost, StringFormat={}{0} руб.}"
-                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <Button Command="{Binding DataContext.AcceptCommand, ElementName=CallControl}"
+                                            <TextBlock Grid.Column="1" Text="{Binding TotalCost, StringFormat={}{0} руб.}"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 10 0"/>
+                                            <Button Command="{Binding DataContext.ReadyCommand, ElementName=CookControl}"
                                                 CommandParameter="{Binding Path=.}" Style="{DynamicResource SquareButtonStyle}"
                                                 Grid.Column="2" Content="Ready" FontSize="14" Background="#FFF4DE"/>
-                                    </Grid>
-                                </Border>
+                                        </Grid>
+                                    </Border>
 
-                                <Border Grid.Row="1" Margin="10 0 10 0"
+                                    <Border Grid.Row="1" Margin="10 0 10 0"
                                         BorderThickness="1" BorderBrush="Black" Background="LightGray">
-                                    <ItemsControl ItemsSource="{Binding CartLines, Mode=TwoWay}">
-                                        f
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition/>
-                                                        <ColumnDefinition/>
-                                                    </Grid.ColumnDefinitions>
+                                        <ItemsControl ItemsSource="{Binding CartLines, Mode=TwoWay}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="5">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition Width="auto"/>
+                                                        </Grid.ColumnDefinitions>
 
-                                                    <TextBlock Grid.Column="0"/>
 
-                                                    <TextBlock Grid.Column="1" Text="{Binding Quantity}"/>
+                                                        <TextBlock Grid.Column="0" VerticalAlignment="Center">
+                                                            <TextBlock.Text>
+                                                                <MultiBinding Converter="{StaticResource idConverter}">
+                                                                    <Binding Path="ProductId"/>
+                                                                    <Binding ElementName="CookControl" Path="DataContext.Products"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
 
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </Border>
+                                                        <TextBlock Grid.Column="1" Text="{Binding Quantity}"/>
 
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Border>
 
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+            </Grid>
         </Grid>
+        
             
     </Grid>
 </UserControl>
