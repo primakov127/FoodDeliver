@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\AdminEndpoint.cs" />
     <Compile Include="Api\APIHelper.cs" />
     <Compile Include="Api\CallEndpoint.cs" />
     <Compile Include="Api\CookEndpoint.cs" />
+    <Compile Include="Api\IAdminEndpoint.cs" />
     <Compile Include="Api\IAPIHelper.cs" />
     <Compile Include="Api\ICallEndpoint.cs" />
     <Compile Include="Api\ICookEndpoint.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\ILoggedInUserModel.cs" />
     <Compile Include="Models\LoggedInUserModel.cs" />
+    <Compile Include="Models\NewStaffParamModel.cs" />
     <Compile Include="Models\OrderedProductsModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\ProductModel.cs" />

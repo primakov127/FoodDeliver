@@ -28,5 +28,12 @@ namespace FoodDelivery.WebUI.Controllers.WebAPI
         {
             return repository.GetAll().Where(staff => staff.Position == "cook").ToList();
         }
+
+        [Route("api/Admin/GetAllStaffs")]
+        [Authorize(Roles="admin")]
+        public List<Staff> GetAll()
+        {
+            return repository.GetAll().ToList();
+        }
     }
 }

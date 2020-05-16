@@ -123,6 +123,7 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -154,14 +155,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="EventModels\ExceptionEvent.cs" />
     <Compile Include="EventModels\LogOnEvent.cs" />
     <Compile Include="EventModels\LogOutEvent.cs" />
     <Compile Include="EventModels\ProccesOrderEvent.cs" />
+    <Compile Include="EventModels\ShowAddMenuEvent.cs" />
     <Compile Include="Helpers\Command.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Helpers\ProductIdToNameConverter.cs" />
+    <Compile Include="Helpers\PropertyValidateModel.cs" />
+    <Compile Include="Models\AddStaffInfoModel.cs" />
     <Compile Include="Models\CartLineModel.cs" />
     <Compile Include="Models\OrderDisplayModel.cs" />
+    <Compile Include="Models\StaffDisplayModel.cs" />
+    <Compile Include="Models\UpdateStaffInfoModel.cs" />
+    <Compile Include="ViewModels\AddNewUserViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\CallViewModel.cs" />
     <Compile Include="ViewModels\CookViewModel.cs" />
@@ -169,6 +177,10 @@
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\OrderDisplayViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\UserManagerViewModel.cs" />
+    <Compile Include="Views\AddNewUserView.xaml.cs">
+      <DependentUpon>AddNewUserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
@@ -194,11 +206,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\UserManagerView.xaml.cs">
+      <DependentUpon>UserManagerView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\MenuStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\UserManagerStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddNewUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,13 +9,15 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ContentControl x:Name="MenuViewModel" Grid.Column="0"/>
+        <ContentControl x:Name="MenuViewModel" Grid.Column="0" Grid.ColumnSpan="2"
+                        HorizontalAlignment="Left" Panel.ZIndex="2"/>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>

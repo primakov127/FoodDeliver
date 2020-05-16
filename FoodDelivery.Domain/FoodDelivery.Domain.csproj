@@ -153,6 +153,10 @@
     <Compile Include="Migrations\202005092336149_AddTotalCostToOrd.designer.cs">
       <DependentUpon>202005092336149_AddTotalCostToOrd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005151542408_ReferencesFromStaffToOrders.cs" />
+    <Compile Include="Migrations\202005151542408_ReferencesFromStaffToOrders.designer.cs">
+      <DependentUpon>202005151542408_ReferencesFromStaffToOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -187,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005092336149_AddTotalCostToOrd.resx">
       <DependentUpon>202005092336149_AddTotalCostToOrd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005151542408_ReferencesFromStaffToOrders.resx">
+      <DependentUpon>202005151542408_ReferencesFromStaffToOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

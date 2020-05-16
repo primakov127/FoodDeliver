@@ -8,16 +8,18 @@
              d:DesignHeight="450" d:DesignWidth="800" x:Name="CallControl">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
 
 
         <!--<local:MenuView x:Name="MenuViewModel" Grid.Column="0" Visibility="Visible"/>-->
-        <ContentControl x:Name="MenuViewModel" Grid.Column="0"/>
+        <ContentControl x:Name="MenuViewModel" Grid.Column="0" Grid.ColumnSpan="2"
+                        HorizontalAlignment="Left" Panel.ZIndex="2"/>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>

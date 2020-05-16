@@ -9,6 +9,17 @@
         mc:Ignorable="d" FontSize="18" SizeToContent="WidthAndHeight"
         Title="Food Delivery" MinHeight="450" MinWidth="800">
     <Grid>
-        <ContentControl x:Name="ActiveItem"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <ContentControl x:Name="ActiveItem" Grid.Row="0"/>
+
+        <StatusBar VerticalAlignment="Bottom" Grid.Row="1">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusBarText" Foreground="DarkRed"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </mah:MetroWindow>

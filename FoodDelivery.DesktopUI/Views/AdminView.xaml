@@ -4,9 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
-             mc:Ignorable="d" Background="Black" Width="800" Height="450"
+             mc:Ignorable="d" MinWidth="800" MinHeight="450"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <ContentControl x:Name="MenuViewModel" Grid.Column="0" Grid.ColumnSpan="2" 
+                        HorizontalAlignment="Left" Panel.ZIndex="2"  />
+
+        <ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.ColumnSpan="2"/>
+        
     </Grid>
 </UserControl>

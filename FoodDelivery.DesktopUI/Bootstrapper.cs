@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
+using FoodDelivery.DesktopUI.EventModels;
 using FoodDelivery.DesktopUI.Helpers;
 using FoodDelivery.DesktopUI.Library.Api;
 using FoodDelivery.DesktopUI.Library.Models;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace FoodDelivery.DesktopUI
 {
@@ -40,7 +42,11 @@ namespace FoodDelivery.DesktopUI
                 .ForMember(dest => dest.CartLines, opt => opt.MapFrom(src => src.OrderedProducts))
                 .ReverseMap();
 
+                cnfg.CreateMap<NewStaffParamModel, AddStaffInfoModel>()
+                .ReverseMap();
 
+                cnfg.CreateMap<StaffModel, StaffDisplayModel>()
+                .ReverseMap();
             });
 
             var mapper = config.CreateMapper();
@@ -54,7 +60,8 @@ namespace FoodDelivery.DesktopUI
 
             container.Instance(container)
                 .PerRequest<ICallEndpoint, CallEndpoint>()
-                .PerRequest<ICookEndpoint, CookEndpoint>();
+                .PerRequest<ICookEndpoint, CookEndpoint>()
+                .PerRequest<IAdminEndpoint, AdminEndpoint>();
 
             container
                 .Singleton<IWindowManager, WindowManager>()
@@ -88,6 +95,12 @@ namespace FoodDelivery.DesktopUI
         protected override void BuildUp(object instance)
         {
             container.BuildUp(instance);
+        }
+
+        protected override async void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            await container.GetInstance<IEventAggregator>().PublishOnUIThreadAsync(new ExceptionEvent(e.Exception.InnerException?.Message ?? e.Exception.Message));
         }
     }
 }

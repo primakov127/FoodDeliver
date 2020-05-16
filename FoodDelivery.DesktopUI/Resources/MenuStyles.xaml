@@ -4,7 +4,7 @@
 
     <!--#region Menu Button Style template -->
     
-    <Style x:Key="MenuButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+    <Style x:Key="MenuButton" TargetType="{x:Type Button}" BasedOn="{StaticResource SquareButtonStyle}">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
@@ -19,7 +19,7 @@
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
-        <Setter Property="IsChecked" Value="True" />
+        <Setter Property="IsChecked" Value="False" />
         <Setter Property="ToggleButton.Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -68,15 +68,15 @@
     <Storyboard x:Key="OpenMenu">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle">
             <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="43.5"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="43.5"/>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle1">
             <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-43.5"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-43.5"/>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle2">
             <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
     
@@ -100,22 +100,22 @@
     <!--#region Menu Grid Style with Data Trigger -->
 
     <Style x:Key="MenuGridAnimation" TargetType="Grid">
-        <Setter Property="Width" Value="200" />
+        <Setter Property="Width" Value="40" />
         <Setter Property="Background" Value="WhiteSmoke" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding ElementName=MenuToggleButton, Path=IsChecked}"
-                                     Value="False">
+                                     Value="True">
                 <DataTrigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Width" To="40" Duration="0:0:0.3" />
+                            <DoubleAnimation Storyboard.TargetProperty="Width" To="200" Duration="0:0:0.2" />
                         </Storyboard>
                     </BeginStoryboard>
                 </DataTrigger.EnterActions>
                 <DataTrigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Width" To="200" Duration="0:0:0.3" />
+                            <DoubleAnimation Storyboard.TargetProperty="Width" To="40" Duration="0:0:0.2" />
                         </Storyboard>
                     </BeginStoryboard>
                 </DataTrigger.ExitActions>
@@ -123,6 +123,34 @@
         </Style.Triggers>
     </Style>
     
+    <!--#endregion-->
+
+    <!--#region Menu StackPanel Style with Data Trigger -->
+
+    <Style x:Key="MenuStackPanelAnimation" TargetType="StackPanel">
+        <Setter Property="Width" Value="0" />
+        <Setter Property="Background" Value="WhiteSmoke" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=MenuToggleButton, Path=IsChecked}"
+                                     Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width" To="200" Duration="0:0:0.1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <!--#endregion-->
 
 </ResourceDictionary>

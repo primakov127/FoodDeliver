@@ -11,12 +11,14 @@ using FoodDelivery.DesktopUI.Library.Models;
 
 namespace FoodDelivery.DesktopUI.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>, IHandle<LogOutEvent>, IHandle<ProccesOrderEvent>
+    public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>, IHandle<LogOutEvent>,
+        IHandle<ProccesOrderEvent>, IHandle<ExceptionEvent>
     {
         private IEventAggregator events;
         private ILoggedInUserModel user;
         private SimpleContainer container;
         private IAPIHelper apiHelper;
+        private string statusBarText;
 
         public ShellViewModel(IEventAggregator events, SimpleContainer container, ILoggedInUserModel user, IAPIHelper apiHelper)
         {
@@ -29,6 +31,17 @@ namespace FoodDelivery.DesktopUI.ViewModels
 
             ActivateItem(container.GetInstance<LoginViewModel>());
             //ActivateItem(container.GetInstance<CallViewModel>());
+        }
+
+        public string StatusBarText
+        {
+            get => statusBarText;
+            set => Set(ref statusBarText, value);
+        }
+
+        public void Handle(ExceptionEvent message)
+        {
+            StatusBarText = message.ExceptionMessage;
         }
 
         public void Handle(LogOnEvent message)
@@ -51,6 +64,7 @@ namespace FoodDelivery.DesktopUI.ViewModels
 
         public void Handle(LogOutEvent message)
         {
+            StatusBarText = "";
             user.ResetUserModel();
             apiHelper.LogOutUser();
             ActivateItem(container.GetInstance<LoginViewModel>());

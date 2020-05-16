@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
+             xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views" FontSize="30"
              mc:Ignorable="d"  FontFamily="{DynamicResource Segou}"
-             d:DesignHeight="450" d:DesignWidth="230">
+             d:DesignHeight="450" d:DesignWidth="200">
 
     <Grid Style="{DynamicResource MenuGridAnimation}">
         <Grid.RowDefinitions>
@@ -19,8 +19,35 @@
         <Rectangle Grid.Row="0" Fill="#7A8654"/>
         <ToggleButton x:Name="MenuToggleButton" Grid.Row="0" HorizontalAlignment="Right"
                       Style="{DynamicResource MenuToggleButton}" />
-        
 
+
+        <StackPanel Grid.Row="1" Style="{DynamicResource MenuStackPanelAnimation}">
+
+            <Grid Background="#5B5444" Margin="5 5 5 0">
+                <TextBlock Text="Name" HorizontalAlignment="Center"/>
+            </Grid>
+            <Border BorderThickness="1" BorderBrush="Black"
+                    Background="#FFF4DE" Margin="10 0 10 0">
+                <TextBlock Text="{Binding User.Name}" HorizontalAlignment="Center" FontSize="20"/>
+            </Border>
+
+            <Grid Background="#585444" Margin="5 5 5 0">
+                <TextBlock Text="Role" HorizontalAlignment="Center"/>
+            </Grid>
+            <Border BorderThickness="1" BorderBrush="Black"
+                    Background="#FFF4DE" Margin="10 0 10 0">
+                <TextBlock Text="{Binding User.Position}" HorizontalAlignment="Center" FontSize="20"/>
+            </Border>
+
+            <Grid Background="#585444" Margin="5 5 5 0">
+                <TextBlock Text="Phone" HorizontalAlignment="Center"/>
+            </Grid>
+            <Border BorderThickness="1" BorderBrush="Black"
+                    Background="#FFF4DE" Margin="10 0 10 0">
+                <TextBlock Text="{Binding User.Phone}" HorizontalAlignment="Center" FontSize="20"/>
+            </Border>
+
+        </StackPanel>
 
         <Button x:Name="LogOut" Grid.Row="2" Style="{DynamicResource MenuButton}">
             <StackPanel Orientation="Horizontal">

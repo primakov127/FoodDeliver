@@ -2,6 +2,7 @@
 using FoodDelivery.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace FoodDelivery.Domain.Concrete
             Staff staff = Get(id);
             if (staff != null)
             {
+                context.Orders.Where(order => order.Cook_UserId == id || order.Call_UserId == id).Load();
                 context.Staffs.Remove(staff);
                 context.SaveChanges();
             }
@@ -47,6 +49,7 @@ namespace FoodDelivery.Domain.Concrete
                 staff.Name = entity.Name;
                 staff.Phone = entity.Phone;
                 staff.Position = entity.Position;
+                context.SaveChanges();
                 return true;
             }
             else
