@@ -155,6 +155,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="EventModels\AdminInnerViewChangeEvent.cs" />
     <Compile Include="EventModels\ExceptionEvent.cs" />
     <Compile Include="EventModels\LogOnEvent.cs" />
     <Compile Include="EventModels\LogOutEvent.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Helpers\ProductIdToNameConverter.cs" />
     <Compile Include="Helpers\PropertyValidateModel.cs" />
+    <Compile Include="Helpers\StaffIdToNameConverter.cs" />
     <Compile Include="Models\AddStaffInfoModel.cs" />
     <Compile Include="Models\CartLineModel.cs" />
     <Compile Include="Models\OrderDisplayModel.cs" />
@@ -176,6 +178,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\OrderDisplayViewModel.cs" />
+    <Compile Include="ViewModels\OrderManagerViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\UserManagerViewModel.cs" />
     <Compile Include="Views\AddNewUserView.xaml.cs">
@@ -198,6 +201,9 @@
     </Compile>
     <Compile Include="Views\OrderDisplayView.xaml.cs">
       <DependentUpon>OrderDisplayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderManagerView.xaml.cs">
+      <DependentUpon>OrderManagerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -246,6 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrderDisplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

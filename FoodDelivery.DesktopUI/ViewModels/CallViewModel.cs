@@ -26,13 +26,6 @@ namespace FoodDelivery.DesktopUI.ViewModels
             this.signalrService = signalrService;
 
             AcceptCommand = new Command(Accept, _ => true);
-            timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
-            timer.Tick += TimeUpdateOrderList;
-        }
-
-        ~CallViewModel()
-        {
-            timer.Stop();
         }
 
         public Command AcceptCommand { get; set; }

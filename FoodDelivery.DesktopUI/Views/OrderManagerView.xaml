@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="FoodDelivery.DesktopUI.Views.OrderManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:FoodDelivery.DesktopUI.Views"
+             mc:Ignorable="d" Background="White" FontFamily="{DynamicResource Segou}"
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="OrderManagerControl">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#767F60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Orders:" FontSize="30" Margin="10 0"/>
+
+            <DatePicker Grid.Column="1" Margin="10" Focusable="False"
+                        mah:TextBoxHelper.Watermark="Pick a date" SelectedDate="{Binding SelectedDate}"/>
+
+            <Button x:Name="Search" Grid.Column="2" Style="{DynamicResource MenuButton}" Margin="0 10 10 10">
+                <iconPacks:PackIconIonicons Kind="SearchiOS" />
+            </Button>
+
+            <Button x:Name="Update" Grid.Column="3" Style="{DynamicResource MenuButton}" Margin="0 10 10 10">
+                <iconPacks:PackIconJamIcons Kind="Refresh" />
+            </Button>
+
+        </Grid>
+
+        <DataGrid x:Name="Orders" Grid.Row="1" AutoGenerateColumns="False" 
+                  CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Client Name" Binding="{Binding ClientName}"/>
+                <DataGridTextColumn Header="Client Address" Binding="{Binding ClientAddress}"/>
+                <DataGridTextColumn Header="Client Phone" Binding="{Binding ClientPhone}"/>
+                <DataGridTextColumn Header="Total cost" Binding="{Binding TotalCost}"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Call">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding Converter="{StaticResource staffIdConverter}">
+                            <Binding Path="Call_UserId"/>
+                            <Binding ElementName="OrderManagerControl" Path="DataContext.Staffs"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Cook">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding Converter="{StaticResource staffIdConverter}">
+                            <Binding Path="Cook_UserId"/>
+                            <Binding ElementName="OrderManagerControl" Path="DataContext.Staffs"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+    </Grid>
+</UserControl>

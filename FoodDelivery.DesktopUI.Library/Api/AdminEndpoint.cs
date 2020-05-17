@@ -110,5 +110,21 @@ namespace FoodDelivery.DesktopUI.Library.Api
                 }
             }
         }
+
+        public async Task<List<OrderModel>> GetOrders()
+        {
+            using (HttpResponseMessage response = await apiHelper.ApiClient.GetAsync("/api/Order/GetAll"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<List<OrderModel>>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

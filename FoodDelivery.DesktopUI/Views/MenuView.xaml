@@ -14,6 +14,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition />
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Rectangle Grid.Row="0" Fill="#7A8654"/>
@@ -49,7 +50,24 @@
 
         </StackPanel>
 
-        <Button x:Name="LogOut" Grid.Row="2" Style="{DynamicResource MenuButton}">
+        <StackPanel Grid.Row="2" Style="{DynamicResource AdminMenuStackPanel}">
+            <Button x:Name="UserManager" Grid.Row="3" Style="{DynamicResource MenuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="Account" VerticalAlignment="Center"
+                                            Foreground="Purple" Margin="5 0"/>
+                    <TextBlock Text="User Manager" Margin="5 0"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="Orders" Grid.Row="3" Style="{DynamicResource MenuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconUnicons Kind="ClipboardNotes" VerticalAlignment="Center"
+                                            Foreground="Green" Margin="5 0"/>
+                    <TextBlock Text="Orders" Margin="5 0"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        
+        <Button x:Name="LogOut" Grid.Row="3" Style="{DynamicResource MenuButton}">
             <StackPanel Orientation="Horizontal">
                 <iconPacks:PackIconBoxIcons Kind="RegularLogOut" VerticalAlignment="Center"
                                             Foreground="Red" Margin="5 0"/>

@@ -31,9 +31,10 @@ namespace FoodDelivery.WebUI.Controllers.WebAPI
             return ((EFOrderRepository)repository).GetOrdersByCookId(userId);
         }
         
-        public IEnumerable<Order> GetAllOrders()
+        [Route("api/Order/GetAll")]
+        public List<Order> GetAllOrders()
         {
-            return repository.GetAll();
+            return repository.GetAll().ToList();
         }
 
         public Order GetOrder(int id)

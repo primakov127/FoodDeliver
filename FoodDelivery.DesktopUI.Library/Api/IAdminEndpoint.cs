@@ -7,6 +7,7 @@ namespace FoodDelivery.DesktopUI.Library.Api
     public interface IAdminEndpoint
     {
         Task<List<StaffModel>> GetAllStaffs();
+        Task<List<OrderModel>> GetOrders();
         Task UpdateStaff(StaffModel staff, string password = null, string email = null);
         Task DeleteStaff(string staffId);
         Task AddStaff(NewStaffParamModel param);

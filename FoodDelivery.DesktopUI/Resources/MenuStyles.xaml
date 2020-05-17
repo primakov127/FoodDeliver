@@ -152,5 +152,18 @@
     </Style>
 
     <!--#endregion-->
+    
+    <!--#region Admin menu StackPanel Style with Data Trigger -->
+
+    <Style x:Key="AdminMenuStackPanel" TargetType="StackPanel">
+        <Setter Property="Visibility" Value="Hidden"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsAdmin}" Value="True">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--#endregion-->
 
 </ResourceDictionary>
