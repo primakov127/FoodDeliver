@@ -1,6 +1,7 @@
 ﻿using FoodDelivery.Domain.Concrete;
 using FoodDelivery.WebUI.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
@@ -13,7 +14,7 @@ using System.Web.Http;
 
 namespace FoodDelivery.WebUI
 {
-    public class IdentityConfig
+    public class OwinConfig
     {
         public void Configuration(IAppBuilder app)
         {
@@ -47,6 +48,8 @@ namespace FoodDelivery.WebUI
 
             HttpConfiguration config = new HttpConfiguration();
             WebApiConfig.Register(config);
+
+            app.MapSignalR();
         }
     }
 }

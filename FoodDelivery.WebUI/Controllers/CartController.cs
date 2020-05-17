@@ -1,5 +1,6 @@
 ﻿using FoodDelivery.Domain.Abstract;
 using FoodDelivery.Domain.Entities;
+using FoodDelivery.WebUI.Hubs;
 using FoodDelivery.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,10 @@ namespace FoodDelivery.WebUI.Controllers
             {
                 orderProcessor.ProcessOrder(cart, order);
                 cart.Clear();
+
+                // Notify all Staff that orders table was updated
+                OrdersHub.NotifyOrdersUpdateToAllClient();
+
                 return View("Completed");
             }
             else

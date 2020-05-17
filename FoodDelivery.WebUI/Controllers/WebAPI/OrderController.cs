@@ -1,6 +1,7 @@
 ﻿using FoodDelivery.Domain.Abstract;
 using FoodDelivery.Domain.Concrete;
 using FoodDelivery.Domain.Entities;
+using FoodDelivery.WebUI.Hubs;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -42,19 +43,31 @@ namespace FoodDelivery.WebUI.Controllers.WebAPI
 
         public Order AddOrder(Order order)
         {
-            return repository.Add(order);
+            var result = repository.Add(order);
+
+            // Notify all Staff that orders table was updated
+            OrdersHub.NotifyOrdersUpdateToAllClient();
+
+            return result;
         }
 
         [HttpPut]
         public bool UpdateOrder(Order order)
         {
-            
-            return repository.Update(order);
+            var result = repository.Update(order);
+
+            // Notify all Staff that orders table was updated
+            OrdersHub.NotifyOrdersUpdateToAllClient();
+
+            return result;
         }
 
         public void DeleteOrder(int id)
         {
             repository.Remove(id);
+
+            // Notify all Staff that orders table was updated
+            OrdersHub.NotifyOrdersUpdateToAllClient();
         }
 
     }

@@ -18,15 +18,18 @@ namespace FoodDelivery.DesktopUI.ViewModels
         private BindingList<OrderDisplayModel> orders;
         private ICookEndpoint cookEndpoint;
         private IMapper mapper;
+        private ISignalrService signalrService;
         private BindingList<ProductModel> products;
 
-        public CookViewModel(ICookEndpoint cookEndpoint, MenuViewModel menu, IMapper mapper)
+        public CookViewModel(ICookEndpoint cookEndpoint, MenuViewModel menu, IMapper mapper, ISignalrService signalrService)
         {
             this.cookEndpoint = cookEndpoint;
             this.mapper = mapper;
+            this.signalrService = signalrService;
             this.MenuViewModel = menu;
 
             ReadyCommand = new Command(Ready, _ => true);
+            
         }
 
         public Command ReadyCommand { get; set; }
@@ -50,6 +53,15 @@ namespace FoodDelivery.DesktopUI.ViewModels
             base.OnViewLoaded(view);
             await LoadOrders();
             await LoadProduct();
+
+            // Subscribe on the Server OrdersUpdate event
+            signalrService.UpdateOrders += async () => await LoadOrders();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            signalrService.UpdateOrders -= async () => await LoadOrders();
+            base.OnDeactivate(close);
         }
 
         private async Task LoadOrders()

@@ -67,7 +67,8 @@ namespace FoodDelivery.DesktopUI
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<ILoggedInUserModel, LoggedInUserModel>()
-                .Singleton<IAPIHelper, APIHelper>();
+                .Singleton<IAPIHelper, APIHelper>()
+                .Singleton<ISignalrService, SignalrService>();
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)

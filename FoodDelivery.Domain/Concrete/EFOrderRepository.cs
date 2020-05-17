@@ -26,13 +26,13 @@ namespace FoodDelivery.Domain.Concrete
 
         public IEnumerable<Order> GetAll()
         {
-            //var x = context.Orders.ToList();
             return context.Orders;
         }
 
+        // Get only 10 new orders
         public List<Order> GetNewOrders()
         {
-            return context.Orders.Where(order => order.Status == "NEW").ToList();
+            return context.Orders.Where(order => order.Status == "NEW").Take(10).ToList();
         }
 
         public List<Order> GetOrdersByCookId(string cookId)

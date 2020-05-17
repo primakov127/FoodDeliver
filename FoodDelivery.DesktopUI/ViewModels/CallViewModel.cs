@@ -16,12 +16,14 @@ namespace FoodDelivery.DesktopUI.ViewModels
         private ICallEndpoint callEndpoint;
         private DispatcherTimer timer;
         private IEventAggregator events;
+        private ISignalrService signalrService;
 
-        public CallViewModel(ICallEndpoint callEndpoint, IEventAggregator events, MenuViewModel menu)
+        public CallViewModel(ICallEndpoint callEndpoint, IEventAggregator events, MenuViewModel menu, ISignalrService signalrService)
         {
             this.callEndpoint = callEndpoint;
             this.MenuViewModel = menu;
             this.events = events;
+            this.signalrService = signalrService;
 
             AcceptCommand = new Command(Accept, _ => true);
             timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
@@ -47,7 +49,15 @@ namespace FoodDelivery.DesktopUI.ViewModels
         {
             base.OnViewLoaded(view);
             await LoadOrders();
-            //timer.Start();
+
+            // Subscribe on the Server OrdersUpdate event
+            signalrService.UpdateOrders += async () => await LoadOrders();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            signalrService.UpdateOrders -= async () => await LoadOrders();
+            base.OnDeactivate(close);
         }
 
         private async Task LoadOrders()
