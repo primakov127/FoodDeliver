@@ -101,6 +101,14 @@ namespace FoodDelivery.DesktopUI.ViewModels
             events.PublishOnUIThread(new LogOnEvent());
         }
 
+        public async void Cancel()
+        {
+            order.Status = "CANCELED";
+            var confirmedOrder = mapper.Map<OrderModel>(order);
+            await callEndpoint.UpdateOrder(confirmedOrder);
+            events.PublishOnUIThread(new LogOnEvent());
+        }
+
         protected override void OnActivate()
         {
             base.OnActivate();

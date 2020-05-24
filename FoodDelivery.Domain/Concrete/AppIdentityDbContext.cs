@@ -11,7 +11,7 @@ namespace FoodDelivery.Domain.Concrete
 {
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {
-        public AppIdentityDbContext() : base("name=EFDbContext") { }
+        public AppIdentityDbContext() : base("name=IdentityDbContext") { }
 
         static AppIdentityDbContext()
         {
@@ -33,7 +33,39 @@ namespace FoodDelivery.Domain.Concrete
         }
         public void PerformInitialSetup(AppIdentityDbContext context)
         {
-            // настройки конфигурации контекста будут указываться здесь
+            AppUserManager userManager = new AppUserManager(new UserStore<AppUser>(context));
+            AppRoleManager roleManager = new AppRoleManager(new RoleStore<AppRole>(context));
+
+            string userName = "admin";
+            string password = "p@ssw0rd";
+            string email = "admin@gmail.com";
+
+            if (!roleManager.RoleExistsAsync("admin").Result)
+            {
+                roleManager.CreateAsync(new AppRole("admin"));
+            }
+
+            if (!roleManager.RoleExistsAsync("cook").Result)
+            {
+                roleManager.CreateAsync(new AppRole("cook"));
+            }
+
+            if (!roleManager.RoleExistsAsync("call").Result)
+            {
+                roleManager.CreateAsync(new AppRole("call"));
+            }
+
+            AppUser user = userManager.FindByNameAsync(userName).Result;
+            if (user != null)
+            {
+                userManager.CreateAsync(new AppUser { UserName = userName, Email = email }, password);
+                user = userManager.FindByNameAsync(userName).Result;
+            }
+
+            if (!userManager.IsInRoleAsync(user.Id, "admin").Result)
+            {
+                userManager.AddToRoleAsync(user.Id, "admin");
+            }
         }
     }
 }
